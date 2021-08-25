@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+@media all and (min-width:1px) and (max-width:1023px) { /* elements2 */
+        .HAH {float: left; width: 100%;}
+        .info {float: left;display: block; width: 100%;}
+        .info2{margin-left: 30px; margin-right: 30px;}
+        .info1, .info2{margin-top: 10px;}
+}
+@media all and (min-width:1px) and (max-width:465px) { /* elements2 */
+        .abb {font-size: 30vw;}
+        .hahFont {font-size: 20vw;}
+}
+@media all and (min-width:1px) and (max-width:850px) { /* elements2 */
+        .footer{font-size: 8px}
+}
+@media all and (min-width:1px) and (max-width:1023px) { /* main */
+        #logo {width: 100%;}
+}
+@media all and (min-width:1px) and (max-width:605px) { /* main */
+        .headImg {width: 100%;}
+        .moveImg {width: 100%;}
+}
+@media all and (min-width:1px) and (max-width:400px) { /* main */
+        #logo span {font-size: 20vw; line-height: 20vw;}
+}
