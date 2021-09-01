@@ -12,6 +12,35 @@ import model.common.JDBC;
 public class MessageDAO {
 
 //===================================================================================================================
+	public ArrayList<MessageVO> searchDBList(String condition, String content) {
+		Connection conn = JDBC.connect();
+		ArrayList<MessageVO> datas = new ArrayList();
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "select * from message where " + condition + " like '" + content + "%' order by mnum desc";
+
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MessageVO vo = new MessageVO();
+				vo.setContent(rs.getString("content"));
+				vo.setMnum(rs.getInt("mnum"));
+				vo.setTitle(rs.getString("title"));
+				vo.setWriter(rs.getString("writer"));
+				datas.add(vo);
+			}
+			rs.close();
+		} catch (Exception e) {
+			System.out.println("searchDBList()에서 출력");
+			e.printStackTrace();
+		} finally {
+			JDBC.disconnect(pstmt, conn);
+		}
+
+		return datas;
+	}
+
+//===================================================================================================================
 	public ArrayList<MessageVO> getDBList() {
 		Connection conn = JDBC.connect();
 		ArrayList<MessageVO> datas = new ArrayList();
@@ -25,7 +54,6 @@ public class MessageDAO {
 				vo.setContent(rs.getString("content"));
 				vo.setMnum(rs.getInt("mnum"));
 				vo.setTitle(rs.getString("title"));
-				vo.setWdate(rs.getDate("wdate"));
 				vo.setWriter(rs.getString("writer"));
 				datas.add(vo);
 			}
@@ -55,7 +83,6 @@ public class MessageDAO {
 				data.setContent(rs.getString("content"));
 				data.setMnum(rs.getInt("mnum"));
 				data.setTitle(rs.getString("title"));
-				data.setWdate(rs.getDate("wdate"));
 				data.setWriter(rs.getString("writer"));
 			}
 			rs.close();
@@ -74,7 +101,7 @@ public class MessageDAO {
 		boolean res = false;
 		PreparedStatement pstmt = null;
 		try {
-			String sql_INSERT = "INSERT INTO message VALUES ((SELECT NVL(MAX(mNum),0)+1 FROM message),?,?,?,sysdate)";
+			String sql_INSERT = "INSERT INTO message VALUES ((SELECT NVL(MAX(mNum),0)+1 FROM message),?,?,?)";
 			pstmt = conn.prepareStatement(sql_INSERT);
 			pstmt.setString(1, vo.getWriter());
 			pstmt.setString(2, vo.getTitle());
@@ -117,7 +144,7 @@ public class MessageDAO {
 		boolean res = false;
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "update message set writer=?, title=?, content=?, wdate=sysdate where mnum=?";
+			String sql = "update message set writer=?, title=?, content=? where mnum=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getWriter());
 			pstmt.setString(2, vo.getTitle());

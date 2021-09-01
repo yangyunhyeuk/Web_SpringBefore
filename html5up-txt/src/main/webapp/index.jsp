@@ -74,6 +74,8 @@
 														<section class="box feature">
 															<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
 															<h3><a href="#">And Another</a></h3>
+							
+							
 															<p>
 																Phasellus quam turpis, feugiat sit amet ornare in, a hendrerit in
 																lectus dolore. Praesent semper mod quis eget sed etiam eu ante risus.

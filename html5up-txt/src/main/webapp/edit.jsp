@@ -95,11 +95,7 @@
 										<td><input type="text" name="content"
 											value="<%=data.getContent()%>"></td>
 									</tr>
-									<tr>
-										<td>작성일</td>
-										<td><input type="date" name="date"
-											value="<%=data.getWdate()%>"></td>
-									</tr>
+								
 									<tr>
 										<td colspan='2'><input type="submit" value="내용 변경하기">
 											<input type="button" value="글 삭제하기" onClick="del()"></td>

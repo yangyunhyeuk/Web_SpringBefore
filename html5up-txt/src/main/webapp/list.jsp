@@ -1,24 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.message.*,java.util.*"%>
+	pageEncoding="UTF-8"
+	import="model.message.*,java.util.*,  model.member.*"%>
 <jsp:useBean id="datas" class="java.util.ArrayList" scope="request" />
+<%
+MemberVO vos = (MemberVO) session.getAttribute("mem");//네임을 인자로!
+//vos.getMid();
+//vos.getMpw();
+%>
+<jsp:useBean id="list" class="java.util.ArrayList" scope="request" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>글 입력 화면</title>
 <script type="text/javascript">
-	function check(mnum){
-		writer=prompt("글 정보 변경을 위해 작성자명을 입력하시오.");
-		document.location.href="control.jsp?action=edit&mnum="+mnum+"&writer="+writer;
-	}
+	/* 로그인 후 본인이 작성한 게시글이 보이기 때문에 따로 보안절차 X
+	 */
+	function check(mnum) {
+		writer = prompt("글 정보 변경을 위해 작성자를 입력하시오.");
+		document.location.href = "control.jsp?action=edit&mnum=" + mnum
+				+ "&writer=" + writer;
+	} //if (vos.getMid().equals(vo.getWriter()))
 </script>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-
 <body class="is-preload">
+
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -29,6 +39,7 @@
 						<a href="index.jsp">메인으로 이동하기</a>
 					</h1>
 				</div>
+
 			</div>
 		</header>
 
@@ -54,7 +65,7 @@
 				<li class="current"><a href="no-sidebar.html">No Sidebar</a></li>
 			</ul>
 		</nav>
-							
+
 
 		<!-- Main -->
 		<section id="main">
@@ -63,29 +74,43 @@
 					<div class="col-12">
 						<div class="content">
 
-							<!-- Content -->
+							<form action="control.jsp" method="post">
+								<input type="hidden" name="action" value="search"> <select
+									name="condition">
+									<option selected value="title">제목</option>
+									<option value="writer">작성자</option>
+								</select> <br> <input type="text" name="content"> <br>
+								<input type="submit" value="검색하기">
+							</form>
+							<br> <br> <br> <br> <br>
 
-							<h2>게시글 목록</h2>
+
+
+
+
+
+							<h2>검색 게시글 목록</h2>
 							<hr>
-							<a href="form.jsp">글 등록</a>
+
 							<hr>
 							<table border="1">
 								<tr>
 									<td>글 번호</td>
 									<td>제목</td>
 									<td>작성자</td>
-									<td>작성일</td>
+									<td>내용</td>
 								</tr>
+
 								<%
-								for (MessageVO vo : (ArrayList<MessageVO>) datas) {
+								for (MessageVO vo : (ArrayList<MessageVO>) list) {
 								%>
 								<tr>
 									<!-- "control.jsp?action=edit&mnum=vo.getMnum()" -->
-									<td><a href="javascript:check(<%=vo.getMnum()%>)"><%=vo.getMnum()%></a></td>
+									<td><%=vo.getMnum()%></td>
 									<!-- 글 변경을 위한 비밀번호 등의 인증작업처리 필요! -->
 									<td><%=vo.getTitle()%></td>
 									<td><%=vo.getWriter()%></td>
-									<td><%=vo.getWdate()%></td>
+									<td><%=vo.getContent()%></td>
 								</tr>
 								<%
 								}
@@ -93,8 +118,145 @@
 							</table>
 
 
+
+
+							<br> <br> <br> <br> <br> <br>
+
+
+
+
+							<!-- Content -->
+
+
+
+
+							<h2>게시글 목록</h2>
+							<hr>
+
+							<hr>
+							<table border="1">
+								<tr>
+									<td>글 번호</td>
+									<td>제목</td>
+									<td>작성자</td>
+									<td>내용</td>
+								</tr>
+
+								<%
+								for (MessageVO vo : (ArrayList<MessageVO>) datas) {
+								%>
+								<tr>
+									<!-- "control.jsp?action=edit&mnum=vo.getMnum()" -->
+									<td><%=vo.getMnum()%></td>
+									<!-- 글 변경을 위한 비밀번호 등의 인증작업처리 필요! -->
+									<td><%=vo.getTitle()%></td>
+									<td><%=vo.getWriter()%></td>
+									<td><%=vo.getContent()%></td>
+								</tr>
+								<%
+								}
+								%>
+							</table>
+
+							<hr>
+							<hr>
+							<br> <br> <br> <br> <br> <br>
+							<%
+							if (session.getAttribute("mem") == null) {
+							%>
+							<form action="control.jsp" method="post" name="form1">
+								<input type="hidden" name="action" value="login">
+								<table border="1">
+									<tr>
+										<td>아이디</td>
+										<td><input type="text" name="mid"></td>
+									</tr>
+									<tr>
+										<td>패스워드</td>
+										<td><input type="password" name="mpw"></td>
+									</tr>
+									<tr>
+										<td colspan='2'><input type="submit" value="로그인"></td>
+									</tr>
+
+								</table>
+							</form>
+							<a href="mem_reg.jsp">회원가입</a>
+							<%
+							} else {
+							%>
+							<form action="control.jsp" method="post" name="form1">
+								<input type="hidden" name="action" value="logout"> <input
+									type="submit" value="로그아웃">
+							</form>
+							<%
+							}
+							%>
 						</div>
 					</div>
+
+
+
+					<br> <br> <br>
+
+
+
+
+					<div class="col-12">
+						<div class="content">
+
+							<%
+							if (session.getAttribute("mem") != null) {
+								//messageDAO.getDBList();
+							%>
+							<a href="form.jsp">글 등록</a> <br> <br>
+							<h2 class="major">
+								<span><%=vos.getMid()%>님의 게시글</span>
+							</h2>
+
+							<table border="1">
+								<tr>
+									<td>글 번호</td>
+									<td>제목</td>
+									<td>작성자</td>
+									<td>내용</td>
+								</tr>
+
+
+								<%
+								for (MessageVO vo : (ArrayList<MessageVO>) datas) {
+									if (vos.getMid().equals(vo.getWriter())) {
+								%>
+
+
+								<tr>
+									<td><a href="javascript:check(<%=vo.getMnum()%>)"><%=vo.getMnum()%></a></td>
+									<td><%=vo.getTitle()%></td>
+									<td><%=vo.getWriter()%></td>
+									<td><%=vo.getContent()%></td>
+								</tr>
+								<%
+								}
+								}
+								%>
+							</table>
+							<%
+							} else {
+							%>
+
+							<p>작성된 게시글이 없습니다.</p>
+							<%
+							}
+							%>
+
+						</div>
+					</div>
+
+
+
+
+
+
 					<div class="col-12">
 
 						<!-- Features -->
@@ -108,6 +270,7 @@
 
 										<!-- Feature -->
 										<section class="box feature">
+
 											<a href="#" class="image featured"><img
 												src="images/pic01.jpg" alt="" /></a>
 											<h3>
@@ -248,6 +411,5 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-
 </body>
 </html>

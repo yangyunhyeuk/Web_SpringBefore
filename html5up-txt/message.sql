@@ -7,8 +7,8 @@ create table message(
 );
 select * from all_tables;
 select * from message;
-insert into message values(1,'kim','제목','내용',sysdate);
-insert into message values(2,'kim2','제목2','내용2',sysdate);
+insert into message values(1,'one','제목','내용',sysdate);
+insert into message values(2,'two','제목2','내용2',sysdate);
 /* 샘플데이터 : 일반적으로 서비스 될때에는 샘플데이터 有! */
 drop table PRODUCT;
 drop table message;
