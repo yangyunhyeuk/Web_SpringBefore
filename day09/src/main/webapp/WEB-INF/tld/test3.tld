@@ -10,11 +10,11 @@
   	<body-content>scriptless</body-content>
   	<attribute>
 		<name>size</name>
-		<required>true</required> <!-- 태그 생성 순간 기본 제공 -->
+		<required>true</required>                     <!-- 태그 생성 순간 기본 제공 -->
   	</attribute>
   	<attribute>
   		<name>color</name>
-  		<required>true</required> <!-- 태그 생성 순간 기본 제공 -->
+  		<required>true</required>                     <!-- 태그 생성 순간 기본 제공 -->
   	</attribute>
   </tag>
   

@@ -4,10 +4,9 @@
 	errorPage="error.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
-String condition=request.getParameter("condition");
-String content=request.getParameter("content");
-System.out.println("조건, 컨텐츠 : "+condition+" "+content);
-
+String condition = request.getParameter("condition");
+String content = request.getParameter("content");
+System.out.println("조건, 컨텐츠 : " + condition + " " + content);
 %>
 <jsp:useBean id="messageDAO" class="model.message.MessageDAO" />
 <jsp:useBean id="messageVO" class="model.message.MessageVO" />
@@ -47,15 +46,15 @@ else if (action.equals("logout")) {
 }
 //======================================================================
 else if (action.equals("mem_reg")) {
-	System.out.println("값"+memVO.toString());
+	System.out.println("값" + memVO.toString());
 	if (memDAO.insertDB(memVO)) {
 		response.sendRedirect("control.jsp?action=list");
 	} else {
 		throw new Exception("DB 추가 에러 발생!");
 	}
 }
-	//======================================================================
- else if (action.equals("insert")) {
+//======================================================================
+else if (action.equals("insert")) {
 	if (messageDAO.insertDB(messageVO)) {
 		response.sendRedirect("control.jsp?action=list");
 	} else {
@@ -79,12 +78,10 @@ else if (action.equals("update")) {
 	}
 }
 
-
-
 //======================================================================
-else if(action.equals("search")){
-	
-	ArrayList<MessageVO> list=messageDAO.searchDBList(condition,content);
+else if (action.equals("search")) {
+
+	ArrayList<MessageVO> list = messageDAO.searchDBList(condition, content);
 	request.setAttribute("list", list);
 	pageContext.forward("list.jsp");
 }
