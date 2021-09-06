@@ -18,7 +18,8 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+
+
 	<br>
 
 	<table border="1">
@@ -29,15 +30,15 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+
 	<br>
-	
+
 	<table border="1">
 		<c:forEach var="v" items="${members}">
 			<tr>
 				<td>${v.name}</td>
 				<td><c:out value="${v.email}" escapeXml="false">
-						<font color="red">이메일 정보없음
+						<font color="red">이메일 정보없음 
 					</c:out></td>
 				<!-- cout의 속성 : escapeXml="false" -->
 			</tr>
