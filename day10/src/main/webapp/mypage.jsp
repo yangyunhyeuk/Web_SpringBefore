@@ -3,6 +3,7 @@
 <jsp:useBean id="memVO" class="model.member.MemberVO" scope="session" />
 <jsp:useBean id="data" class="model.member.MemberVO" scope="request" />
 
+
 <!DOCTYPE html>
 <html>
 <head>

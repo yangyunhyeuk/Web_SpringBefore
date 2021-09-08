@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.*,model.message.*,model.member.*"%>
+	import="java.util.*,model.member.*, model.message.*"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String condition = request.getParameter("condition");
 String content = request.getParameter("content");
 System.out.println("조건, 컨텐츠 : " + condition + " " + content);
 %>
-
 <jsp:useBean id="msgDAO" class="model.message.MessageDAO" />
 <jsp:useBean id="memDAO" class="model.member.MemberDAO" />
 <jsp:useBean id="memVO" class="model.member.MemberVO" scope="session" />
@@ -19,7 +18,9 @@ if (action.equals("main")) {
 	ArrayList<MessageVO> datas = msgDAO.getDBList();
 	request.setAttribute("datas", datas);
 	pageContext.forward("main.jsp");
-} else if (action.equals("login")) {
+} 
+
+else if (action.equals("login")) {
 	MemberVO mem = memDAO.getDBData(memVO);
 	if (mem != null) {
 		session.setAttribute("mem", mem);
@@ -27,7 +28,9 @@ if (action.equals("main")) {
 	} else {
 		out.println("<script>alert('로그인 실패!');history.go(-1)</script>");
 	}
-} else if (action.equals("logout")) {
+} 
+
+else if (action.equals("logout")) {
 	session.invalidate();
 	response.sendRedirect("control.jsp?action=main");
 }
@@ -48,7 +51,8 @@ else if (action.equals("update")) {
 	}
 } else if (action.equals("delete")) {
 	if (memDAO.deleteMem(memVO)) {
-		pageContext.forward("index.jsp");
+		session.invalidate();
+		response.sendRedirect("control.jsp?action=main");
 	} else {
 		throw new Exception("DB 변경 삭제 발생!");
 	}

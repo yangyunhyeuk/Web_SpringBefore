@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.ArrayList, model.message.*"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList,"%>
 <jsp:useBean id="datas" class="java.util.ArrayList" scope="request" />
 <jsp:useBean id="list" class="java.util.ArrayList" scope="request" />
 <jsp:useBean id="memVO" class="model.member.MemberVO" scope="session" />
@@ -25,6 +25,8 @@
 			value="검색하기">
 	</form>
 	<br>
+
+
 
 	<!-- 전체 게시글, 검색 게시글/////////////////////////////////////////////////////// -->
 	<msgtag:msgList />

@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,model.message.*"%>
+    pageEncoding="UTF-8" import="java.util.*,model.protein.*"%>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 	String condition=request.getParameter("condition");
 	String content=request.getParameter("content");
 	//System.out.println(condition+" "+content);
 %>
-<jsp:useBean id="mDAO" class="model.message.MessageDAO" />
+<jsp:useBean id="mDAO" class="model.protein.MessageDAO" />
 <jsp:useBean id="uDAO" class="model.userTable.UserTableDAO" />
 <jsp:useBean id="uVO" class="model.userTable.UserTableVO" />
 <jsp:setProperty property="*" name="uVO"/>
-<jsp:useBean id="mVO" class="model.message.MessageVO" />
+<jsp:useBean id="mVO" class="model.protein.MessageVO" />
 <jsp:setProperty property="*" name="mVO"/>
 <%
 	String action=request.getParameter("action");

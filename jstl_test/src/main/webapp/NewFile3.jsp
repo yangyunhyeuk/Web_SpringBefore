@@ -8,16 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h6>코어태그 if</h6>
-	<c:set var="msg" value="test" />
 
-	<c:if test="${msg=='test'}" var="res">
-	1. 결과는 [${res}]입니다.
-</c:if>
-
-	<c:if test="${msg!='test'}" var="res">
-	2. 결과는 [${res}]입니다.
-</c:if>
 
 
 	<hr>
@@ -58,12 +49,21 @@
 
 
 
+	<!-- 
+	<h6>코어태그 if</h6>
+	<c:set var="msg" value="test" />
+
+	<c:if test="${msg=='test'}" var="res">
+	1. 결과는 [${res}]입니다.
+</c:if>
+
+	<c:if test="${msg!='test'}" var="res">
+	2. 결과는 [${res}]입니다.
+</c:if>
 
 
 
-
-
-
+ -->
 
 
 

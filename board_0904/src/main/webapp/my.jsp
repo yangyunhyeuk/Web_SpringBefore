@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, model.message.*, model.member.*"%>
+	import="java.util.ArrayList,model.protein.*, model.member.*"%>
 <jsp:useBean id="datas" class="java.util.ArrayList" scope="request" />
 <%
 MemberVO vos = (MemberVO) session.getAttribute("mem");//네임을 인자로!

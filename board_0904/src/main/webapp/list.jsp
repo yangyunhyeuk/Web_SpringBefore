@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.ArrayList, model.message.*"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList,model.protein.*"%>
 <jsp:useBean id="datas" class="java.util.ArrayList" scope="request" />
 <!-- action 내부에 request로 요청한 값을 다루기 위해 액션태그 사용 -->
 <jsp:useBean id="memberVO" class="model.member.MemberVO" scope="session"></jsp:useBean>
