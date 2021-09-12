@@ -1,0 +1,35 @@
+---------------------------------------------------
+유저테이블 - (유저/관리자)
+1. MID : 유저/관리자아이디 pk
+2. MPW : 유저/관리자비밀번호
+3. MNAME : 닉네임
+4. MEMAIL : 이메일
+5. ROLE : 유저와 관리자 판별하는 칼럼 (varchar로 구분)
+
+CREATE TABLE MEMBER(
+   MID VARCHAR(50) PRIMARY KEY,       -- 회원 아이디
+   MPW VARCHAR(50) NOT NULL,         -- 회원 비밀번호
+   MNAME VARCHAR(50) NOT NULL,         -- 회원 닉네임
+   MEMAIL VARCHAR(50) NOT NULL,      -- 회원 이메일   
+   ROLE VARCHAR(20) NOT NULL         -- 사용자/관리자
+);
+---------------------------------------------------
+댓글테이블 (공지사항/자유&질문/스터디&팁 3개)
+1. CNUM : 댓글번호 pk
+2. MNAME : 닉네임
+3. PNUM : 게시글번호
+4. MID : 유저아이디
+5. CDATE : 작성일자
+6. COMENT : 댓글내용
+
+[FREECOMMENT], [STUDYCOMMENT], [NOTICECOMMENT]
+
+CREATE TABLE FREECOMMENT(			-- 자유게시판 댓글
+   CNUM INT PRIMARY KEY,            -- 댓글 고유 번호 
+   COMMENT VARCHAR(200) NOT NULL,      -- 댓글 내용 
+   CDATE DATE NOT NULL,             -- 댓글 작성 일자
+   PNUM INT NOT NULL,               -- 게시글 번호  
+   MNAME VARCHAR(50) NOT NULL,       -- 회원 닉네임
+   MID VARCHAR(50) NOT NULL         -- 회원 아이디 
+);
+---------------------------------------------------
