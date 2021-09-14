@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*,model.protein.*"%>
+    pageEncoding="UTF-8" import="java.util.*,model.user.protein.*"%>
 <%
 request.setCharacterEncoding("UTF-8");
 	String condition=request.getParameter("condition");

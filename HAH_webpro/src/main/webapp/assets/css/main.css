@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+/*main logo 폰트*/
+@import url('https://fonts.googleapis.com/css2?family=Faustina&display=swap');
+/* menu 폰트*/
+body, div, span, ul, li, a, br, img{
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+  /* background: url('img/skybg2.jpg') no-repeat;
+  background-size: cover; */
+  background:#FFF4C7; /* 바탕색 */
+  background-size: cover;
+  font-family: 'Faustina', serif;
+  text-align: center;
+  height: 927px;
+}
+#logo{
+	display:block;
+	margin:0 auto;
+	width:50%;
+	font-family: "Paytone One";
+	font-weight:bold;
+  	text-transform: uppercase;
+  	letter-spacing: -2px;
+}
+
+#logo span {
+  display: block;
+  margin: 11px 0 17px 0;
+  font-size: 80px;
+  line-height: 80px;
+  text-shadow: 5px 10px 3px #FF4A2D,0 -2px 1px #fff;
+  letter-spacing: -4px;
+}
+span a{
+	text-decoration:none;
+	color: #FFF22D; /* LOGO 색 */
+}
+.swiper-container{
+  width: 600px;
+  /* height: 500px; */ /* 미디어쿼리 적용을위해 주석처리 */
+}
+.swiper-button-next, .swiper-button-prev {
+    color: #FF4A2D;
+}
+audio {
+    filter: sepia(0.20) saturate(3) grayscale(0) contrast(100%) invert(0%);
+    width: 150px;
+}
+audio::-webkit-media-controls-timeline{
+        display: none !important;
+    }
+audio::-webkit-media-controls-play-button{
+	color:#FF4A2D;
+}
+#muse{
+    float: right;
+}
+
+/*================================밑에서부턴 메뉴바 CSS===================*/
+
+ul { list-style: none; }
+a { text-decoration: none; color: #4E4E4E;}
+
+#menu-wrapper {
+    overflow: hidden;
+    max-width: 55px;
+    cursor: pointer;
+}
+
+
+#menu-wrapper #hamburger-menu {
+    position: relative;
+    
+    width: 25px;
+    height: 20px;
+    margin: 15px;
+}
+
+#menu-wrapper #hamburger-menu span {
+    opacity: 1;
+    /* -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; */
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 4px; /* 三  굵기 */
+    border-radius: 10px;
+    /* color: black; */
+    background-color: #FF4A2D; /* 三 색 */
+    position: absolute;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+}
+/*--------------------------------------------여긴 아마도 三이랑 X 아이콘 구현한 곳 같음*/
+#menu-wrapper #hamburger-menu span:nth-child(1) {
+    top: 0;
+}
+#menu-wrapper #hamburger-menu span:nth-child(2) {
+    top: 9px;
+}
+#menu-wrapper #hamburger-menu span:nth-child(3) {
+    top: 18px;
+}
+#menu-wrapper #hamburger-menu.open span:nth-child(1) {
+    top: 9px;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+#menu-wrapper #hamburger-menu.open span:nth-child(2) {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    left: -60px;
+}
+#menu-wrapper #hamburger-menu.open span:nth-child(3) {
+    top: 9px;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+}
+/*--------------------------------------------여기까지-------------------*/
+
+#menu-container .menu-list .menu-submenu {
+    padding:0;
+}
+#menu-container .menu-list .menu-submenu li a {
+    display:block;
+    padding:10px 0 10px 20px;
+
+}
+#menu-container .menu-list .menu-submenu li a:hover {
+    background:#FFF22D;/* 2nd메뉴에서 마우스 올리면 연노랑*/
+}
+#menu-container .menu-list {
+    padding-left: 0;
+    display: block;
+    border-radius:15px; /*메뉴 바 모서리 둥글게*/
+    position: absolute;
+    width: 100%;
+    max-width: 200px;
+    height: 600px;
+    background: #FF4A2D; /* 메뉴 바 색 */
+    box-shadow: #EEEEEE 6px 2px 10px; /* 메뉴 바 뒤 그림자 색/x/y/len */
+    z-index: 999; /* 우선순위, 값이 클수록 젤 위에서 보여짐*/
+    overflow-y: auto;
+    overflow-x: hidden;
+    left: -100%; /*기본은 가린 상태, 누르면 toggleClass로 나타나게 밑에서 구현*/
+}
+
+#menu-container .menu-list li.accordion-toggle {
+    font-size: 16px;
+    font-weight:bold;
+    padding: 20px;
+    text-transform: uppercase;
+    border-top: 1px solid #dbdcd2; /* 메뉴 바 안의 윗 회색 선*/
+}
+#menu-container .menu-list li:first-of-type {
+    border-top: 0; /* 메뉴 바의 첫번째 메뉴 윗 선 안만들기 인줄 알았는데 모르겠다*/
+}
+
+.accordion-toggle, .accordion-content {
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    letter-spacing: 1px; /*단어마다의 간격*/
+}
+
+  .accordion-content {
+    display: none;
+}
+/*--------------------------------------여기는 +랑 -이런거 만든것같음*/
+.accordion-toggle a:before, .accordion-toggle a:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 15px;
+    height: 2px;
+    margin-top: -1px;
+    background-color: #5a5858;
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s ease-out;
+}
+
+.accordion-toggle a:before {
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    opacity: 1;
+    z-index: 2;
+}
+
+.accordion-toggle.active-tab {
+  background: #2962FF; /*menu 선택 시 나오는 색!!!!*/
+  transition: all 0.3s ease;
+}
+.accordion-toggle a.active:before {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    background: #fff !important;
+}
+
+.accordion-toggle a.active:after {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    background: #fff !important;
+    opacity: 0;
+}
+/*--------------------------------------------여기까지-------------------*/
+.footer{
+	position: relative;
+	bottom:0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background-color: #FF4A2D;
+	z-index: 99;
+}

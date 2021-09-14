@@ -56,6 +56,9 @@ ul li div {
 		});
 		$("ul li a").eq(0).trigger("click");
 	});
+	function del() {
+
+	}
 </script>
 </head>
 <body>
@@ -122,12 +125,14 @@ ul li div {
 				<c:set var="m" value="${v.m}" />
 				<a href="#">
 
-					<h3>[작성자 : ${m.uuid}] [댓글 내용 : ${m.msg}] &gt;&gt; [좋아요
-						${m.favcount} | 대댓글 ${m.replycount} | ${m.udate}]</h3>
-
-
-
+					<h3>
+						[작성자 : ${m.uuid}] [댓글 내용 : ${m.msg}] &gt;&gt; [좋아요 ${m.favcount} |
+						대댓글 ${m.replycount} | ${m.udate}]
+						<button
+							onclick="location.href='control.jsp?action=mdelete&mid=${m.mid}&mcnt=${mcnt}'">삭제</button>
+					</h3>
 				</a>
+
 				<div>
 					<ol>
 						<c:forEach var="r" items="${v.rlist}">
@@ -138,6 +143,7 @@ ul li div {
 					<br>
 					<form action="control.jsp" method="post" name="form1">
 						<input type="hidden" name="action" value="rinsert"> <input
+							type="hidden" name="mcnt" value="${mcnt}"> <input
 							type="hidden" name="mid" value="${m.mid}"> <input
 							type="hidden" name="uuid" value="${m.uuid}">
 
@@ -153,6 +159,7 @@ ul li div {
 								<td colspan='2'><input type="submit" value="작성하기"></td>
 							</tr>
 						</table>
+
 					</form>
 				</div>
 

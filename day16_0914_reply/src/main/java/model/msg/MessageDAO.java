@@ -160,5 +160,29 @@ public class MessageDAO {
 		}
 	}
 
+	public int mcount() {
+		int cnt = 0;
+		Connection conn = DBCP.connect();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select count(*) from message";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt("count(*)");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return cnt;
+	}
 
 }

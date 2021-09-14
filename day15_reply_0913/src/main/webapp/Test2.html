@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	var bDisplay = true;
+	function doDisPlay() {
+		var con = document.getElementById("myDIV");
+		if (con.style.display == 'none') {
+			con.style.display = 'block';
+		} else {
+			con.style.display = 'none';
+		}
+	}
+</script>
+</head>
+<body>
+	<a href="javascript:doDisPlay()">내용보기</a>
+	<br>
+	<br>
+	<div id="myDIV">
+		<h1>내용을 접거나 펴는 방법</h1>
+		<p>display 속성값은 내부 요소를 나타나게 하며 none은 사라지게 합니다.</p>
+	</div>
+</body>
+</html>

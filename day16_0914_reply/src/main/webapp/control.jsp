@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*,model.msg.*,model.user.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 
 
@@ -83,9 +85,16 @@ else if (action.equals("insert")) {
 } else if (action.equals("rinsert")) {
 	System.out.println("minsert 액션 진입 : " + rVO);
 	if (rDAO.insert(rVO)) {
-		pageContext.forward("control.jsp?action=main");
+		response.sendRedirect(url);
+		//pageContext.forward("control.jsp?action=main");
 	} else {
 		out.println("<script>alert('대댓글작성 실패!');history.go(-1)</script>");
+	}
+} else if (action.equals("mdelete")) {
+	if (mDAO.delete(mVO)) {
+		response.sendRedirect(url);
+	} else {
+		out.println("<script>alert('댓글 삭제 실패!');history.go(-1)</script>");
 	}
 }
 

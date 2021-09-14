@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#button_id").click(function() {
+			$("#form_id").show(); //Form shows on button click
+		});
+		
+		
+		
+		
+	});
+</script>
+</head>
+<body>
+	<input type="button" name="button" value="button" id="button_id"
+		onclick="ready();">
+	<form id="form_id" action="" method="POST" style="display: none;">
+		<input type="id" name="login[id]" placeholder="id"><br> <input
+			type="username" name="login[username]" placeholder="username"><br>
+		<input type="password" name="login[password]" placeholder="password"><br>
+		<input type="submit" name="submit" class="submit">
+	</form>
+	<br>
+</body>
+</html>

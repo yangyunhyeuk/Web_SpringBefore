@@ -12,7 +12,7 @@
 
 
 	<form method="post" action="b.jsp">
-		<jsp:useBean id="dataBean" class="model.DataBean" scope="session" />
+		<jsp:useBean id="dataBean" class="user.DataBean" scope="session" />
 		<select name="data">
 			<c:forEach var="v" items="${dataBean.dataList}">
 				<option>${v}</option>

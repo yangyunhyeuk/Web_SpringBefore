@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, model.member.*,model.protein.*"%>
+	import="java.util.ArrayList, model.member.*,model.user.protein.*"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String condition=request.getParameter("condition");
