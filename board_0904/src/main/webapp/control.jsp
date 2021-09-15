@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList, model.member.*,model.user.protein.*"%>
+	import="java.util.ArrayList, model.member.*,model.message.*"%>
 <%
 request.setCharacterEncoding("UTF-8");
 String condition=request.getParameter("condition");
@@ -8,8 +8,8 @@ String content=request.getParameter("content");
 System.out.println("조건, 컨텐츠 : "+condition+" "+content);
 %>
 
-<jsp:useBean id="msgDAO" class="model.protein.MessageDAO"></jsp:useBean><!-- useBean : 객체 생성 액션 태그 -->
-<jsp:useBean id="msgVO" class="model.protein.MessageVO"></jsp:useBean><!-- useBean : 객체 생성 액션 태그 -->
+<jsp:useBean id="msgDAO" class="model.message.MessageDAO"></jsp:useBean><!-- useBean : 객체 생성 액션 태그 -->
+<jsp:useBean id="msgVO" class="model.message.MessageVO"></jsp:useBean><!-- useBean : 객체 생성 액션 태그 -->
 <jsp:setProperty property="*" name="msgVO" /><!-- form을 통해 전송한 값을 세팅해준다. -->
 
 <jsp:useBean id="memberDAO" class="model.member.MemberDAO"
