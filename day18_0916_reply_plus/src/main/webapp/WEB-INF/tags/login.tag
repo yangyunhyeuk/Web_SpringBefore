@@ -6,6 +6,8 @@
 	<input type="hidden" name="mcnt" value="${mcnt}"> 
 	<input type="hidden" name="action" value="login"> 
 	<input type="text" name="uuid"> 
+	<br>
 	<input type="password" name="passwd"> 
+	<br>
 	<input type="submit" value="로그인">
 </form>

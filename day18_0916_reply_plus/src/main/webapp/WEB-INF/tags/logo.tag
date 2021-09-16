@@ -2,9 +2,6 @@
 
 
 
-
-<a href="control.jsp?action=main"><img src="assets/css/img/logo.jpg"
-	border="1px" width="200px" height="150px" alt="양양" title="YunHyeuk"></a>
-	<br>
-	<br>
-	<br>
+	<a href="control.jsp?action=main"><img
+		src="assets/css/img/logo.jpg" width="130px" height="90px" alt="양양"
+		title="YunHyeuk"></a>
