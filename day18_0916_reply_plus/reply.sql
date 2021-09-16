@@ -60,7 +60,7 @@ select * from reply;
 select * from all_tables;
 
 
-
+update message set replycount=replycount-1 where mid=36
 
 update message set replycount=replycount+1 where mid=3;
 
