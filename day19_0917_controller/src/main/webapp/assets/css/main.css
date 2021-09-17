@@ -1,0 +1,94 @@
+ol, li, p {
+	padding: 0px;
+	margin: 0px;
+}
+
+html {
+	position: relative;
+	min-height: 100%;
+	margin: 0;
+}
+
+.hh {
+	display: inline-block;
+	height: 100px;
+	width: 100%;
+	padding: 10px;
+	margin: 10px;
+	background-color: #A10505;
+	font-weight: bold;
+	padding: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: #A10505;
+}
+
+p {
+	color: #A10505;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+.menu {
+	float: left;
+	width: 15%;
+}
+
+.content {
+	float: left;
+	width: 65%;
+}
+
+.ad {
+	float: right;
+	width: 15%;
+}
+
+ol li {
+	list-style: none;
+}
+
+ul {
+	border: 3px solid #ccc;
+	border-radius: 8px;
+	margin: 10px 0 0 10px;
+}
+
+ul li {
+	list-style: none;
+	text-align: center;
+	padding: 10px 0 0 10px;
+	border-top: 1px dotted #ccc;
+	margin-bottom: 10px;
+	padding: 10px 0 0 10px;
+}
+
+ul li:first-child {
+	border: 0 none;
+}
+
+ul li a {
+	height: 20px;
+	line-height: 20px;
+	text-decoration: none;
+	color: #000;
+}
+
+ul li p {
+	color: #f00;
+}
+
+footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding: 15px 0;
+	text-align: center;
+	color: beige;
+	background: #A10505;
+}
