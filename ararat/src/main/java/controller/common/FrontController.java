@@ -1,0 +1,107 @@
+package controller.common;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import controller.action.ActionForward;
+import controller.action.HeartAction;
+import controller.action.InsertAction;
+import controller.action.LoginAction;
+import controller.action.LogoutAction;
+import controller.action.MainAction;
+import controller.action.MdeleteAction;
+import controller.action.MinsertAction;
+import controller.action.RdeleteAction;
+import controller.action.RinsertAction;
+
+/**
+ * Servlet implementation class FrontController
+ */
+@WebServlet("/FrontController")
+public class FrontController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public FrontController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("확인");
+		doAction(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("확인");
+		doAction(request, response);
+
+	}
+
+	private void doAction(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1) 사용자의 요청을 분석
+		String uri = request.getRequestURI();
+		String cp = request.getContextPath();
+		String action = uri.substring(cp.length());
+
+		ActionForward forward = null;
+		// 2) 컨트롤러랑 매핑
+		if (action.equals("/main.do")) {
+			forward = new MainAction().execute(request, response);
+		} else if (action.equals("/login.do")) {
+			// 처리해야하는 프로세스는 LoginAction 파일에서 처리!
+			forward = new LoginAction().execute(request, response);
+		} else if (action.equals("/logout.do")) {
+			forward = new LogoutAction().execute(request, response);
+		} else if (action.equals("/insert.do")) {
+			forward = new InsertAction().execute(request, response);
+		} else if (action.equals("/haction.do")) {
+			forward = new HeartAction().execute(request, response);
+		} else if (action.equals("/mdelete.do")) {
+			forward = new MdeleteAction().execute(request, response);
+		} else if (action.equals("/rdelete.do")) {
+			forward = new RdeleteAction().execute(request, response);
+		} else if (action.equals("/minsert.do")) {
+			forward = new MinsertAction().execute(request, response);
+		} else if (action.equals("/rinsert.do")) {
+			forward = new RinsertAction().execute(request, response);
+		}
+
+		else {
+			// 에러페이지 연결
+			forward = new ActionForward();
+			forward.setRedirect(false); // true인 경우는 데이터가 정말 없는 경우!
+			forward.setPath("/error/error404.jsp");
+		}
+
+		// history go back을 위해 forward가 null이 아닐 때만 수행하게 다음과 같이 조건문을 만든다!!
+		if (forward != null) {
+			// 3) 사용자에게 결과화면 출력
+			if (forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
+		}
+	}
+}
