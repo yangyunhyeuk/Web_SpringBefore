@@ -11,6 +11,11 @@
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+
+
+
+
 	<div align="center" class="hh">
 		<mytag:logo />
 	</div>
@@ -77,7 +82,6 @@
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-넵
 		<c:if test="${mcnt < viewcnt}">
 			<a href="main.do?mcnt=${mcnt+1}&selUser=${selUser}">더보기&gt;&gt;</a>
 			<br>
@@ -140,24 +144,75 @@
 				</c:forEach></li>
 		</ul>
 
-	</div>
+		<h3>페이징 목록</h3>
 
+		<table border="1px">
+			<tr>
+				<td>작성자</td>
+				<td>댓글내용</td>
+				<td>좋아요</td>
+				<td>대댓글</td>
+				<td>날짜</td>
+			</tr>
+			<c:forEach var="v" items="${paging}">
+				<c:set var="m" value="${v.m}" />
+				<tr>
+					<td>${m.uuid}</td>
+					<td>${m.msg}</td>
+					<td>${m.favcount}</td>
+					<td>${m.replycount}</td>
+					<td>${m.udate}</td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		<c:set var="pages" value="5" />
+		<c:set var="p"
+			value="${viewcnt / pages + (viewcnt % pages != 0 ? 1 : 0)}" />
+
+
+		<c:forEach var="i" begin="1" end="${p}">
+			<a href="main.do?page=${i}&selUser=${selUser}"><c:out
+					value="${i}" /></a>
+		</c:forEach>
+
+	</div>
+	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 	<div class="ad">
 		<!-- ////////////////광고글//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<ol>
-			<li><a
-				href="https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB"><img
-					src="assets/css/img/ad1.png" border="1px" width="250px"
-					height="150px" alt="광고_다방"></a></li>
-			<li><a href="https://www.cgv.co.kr/"><img
-					src="assets/css/img/ad2.png" border="1px" width="250px"
-					height="150px" alt="광고_이터널즈"></a></li>
-			<li><a href="https://www.burgerking.co.kr/#/home"><img
-					src="assets/css/img/ad3.png" border="1px" width="250px"
-					height="150px" alt="광고_킹거킹"></a></li>
+			<li>
+				<a href="https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB">
+					<img src="assets/css/img/ad1.png" style="width: 250px; height: 150px; border: 1px solid red;" alt="광고_다방" />
+				</a>
+			</li>
+			<li>
+				<a href="https://www.cgv.co.kr/">
+					<img src="assets/css/img/ad2.png" style="width: 250px; height: 150px; border: 1px solid red;" alt="광고_이터널즈" />
+				</a>
+			</li>
+			<li>
+				<a href="https://www.burgerking.co.kr/#/home">
+					<img src="assets/css/img/ad3.png" style="width: 250px; height: 150px; border: 1px solid red;" alt="광고_킹거킹" />
+				</a>
+			</li>
 		</ol>
+		
+		<input type="button" value="봊튼" onclick="changeAd()" />
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	</div>
@@ -166,6 +221,8 @@
 	<br>
 	<br>
 	<br>
+
+
 	<br>
 	<br>
 	<br>
@@ -179,6 +236,49 @@
 	</footer>
 	<script src="assets/script/main.js"></script>
 	<script src="assets/script/newWindow.js"></script>
-
+	
+	<script>
+		var adProperties = [
+			{
+				href: "https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB",
+				src: "assets/css/img/ad1.png",
+				alt: "광고_다방"
+			},
+			{
+				href: "https://www.cgv.co.kr/",
+				src: "assets/css/img/ad2.png",
+				alt: "광고_이터널즈"
+			},
+			{
+				href: "https://www.burgerking.co.kr/#/home",
+				src: "assets/css/img/ad3.png",
+				alt: "광고_킹거킹"
+			}
+		];
+		
+		function shuffle(_arr) {
+			const arr = _arr.concat();
+			arr.sort(() => Math.random() - 0.5);
+			return arr;
+		}
+	
+		function changeAd() {
+			let ol = document.querySelector(".ad ol");
+			const arr = shuffle(adProperties);
+			console.log(arr);
+			
+			for (let i = 0; i < 3; ++i) {
+				const a = document.querySelector(".ad ol li:nth-child(" + (i + 1) + ") a");
+				const img = document.querySelector(".ad ol li:nth-child(" + (i + 1) + ") img");
+				console.log(a.href);
+				a.href = arr[i].href;
+				img.src = arr[i].src;
+				img.alt = arr[i].alt;
+			}
+		}
+		
+		// setInterval 줘서 시간차에 따라 광고바뀌게 작업해보기
+		changeAd();
+	</script>
 </body>
 </html>

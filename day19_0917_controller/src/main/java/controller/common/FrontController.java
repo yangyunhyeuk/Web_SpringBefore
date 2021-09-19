@@ -41,6 +41,7 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("get 확인");
 		doAction(request, response);
 	}
 
@@ -50,6 +51,7 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("post 확인");
 		doAction(request, response);
 
 	}
@@ -60,7 +62,7 @@ public class FrontController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String cp = request.getContextPath();
 		String action = uri.substring(cp.length());
-
+		System.out.println(action);
 		ActionForward forward = null;
 		// 2) 컨트롤러랑 매핑
 		if (action.equals("/main.do")) {

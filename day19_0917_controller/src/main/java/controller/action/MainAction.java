@@ -31,6 +31,7 @@ public class MainAction implements Action {
 			mcnt = Integer.parseInt(mcntt);
 		}
 
+		System.out.println("메인액션 입장");
 		String selUser = request.getParameter("selUser");
 
 		MessageDAO mDAO = new MessageDAO();
@@ -43,6 +44,20 @@ public class MainAction implements Action {
 
 		System.out.println(viewcnt);
 
+		/* 페이징 프로세스 */
+		String mpage = request.getParameter("page");
+
+		int page = 1;
+		if (mpage != null) {
+			page = Integer.parseInt(mpage);
+
+		}
+
+		System.out.println("페이지 데이터 : " + page);
+		ArrayList<MsgSet> paging = mDAO.mPaging(page);
+		request.setAttribute("paging", paging); // 전체 게시글데이터
+		/* 페이징 프로세스 */
+
 		request.setAttribute("datas", datas); // 전체 게시글데이터
 		request.setAttribute("newUsers", newUsers); // 신규 유저
 		request.setAttribute("selUser", selUser); // 보고있는 유저
@@ -52,6 +67,7 @@ public class MainAction implements Action {
 		forward.setRedirect(false);
 		forward.setPath("main.jsp");
 		// 페이지 전달방식과 경로를 세팅하려고 만든것이다.!
+		System.out.println("메인액션 퇴장");
 
 		return forward;
 

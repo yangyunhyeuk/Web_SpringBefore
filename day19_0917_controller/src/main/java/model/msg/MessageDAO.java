@@ -200,4 +200,102 @@ public class MessageDAO {
 
 	}
 
+	public ArrayList<MsgSet> mPaging(int page) {
+		System.out.println("mPaging 입장");
+
+		Connection conn = DBCP.connect();
+		PreparedStatement pstmt = null;
+		ArrayList<MsgSet> datas = new ArrayList<MsgSet>();
+
+		int offset = 5;
+		page--;
+		System.out.println("여기는 오프셋, 페이지값 구역 : ");
+		System.out.println(offset);
+		System.out.println(page);
+
+		// 초기 페이지 값을 0으로 두고 처리
+		/*
+		 * page = 0 offset = 5
+		 * 
+		 * 0 5-1 5 10-1 10 15-1 15 20-1 20 25-1
+		 * 
+		 * ++page page * offset + 1, (page + 1) * offset
+		 * 
+		 * 0 * 5 + 1, (0 + 1) * 5 1 * 5 + 1, (1 + 1) * 5 2 * 5 + 1, (2 + 1) * 5 3 * 5 +
+		 * 1, (3 + 1) * 5
+		 */
+		String sql;
+		try {
+
+			sql = "select * from (select rownum as mid, uuid, msg, favcount, replycount, udate from message order by mid) where mid between ? and ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, page * offset + 1);
+			pstmt.setInt(2, (page + 1) * offset);
+			System.out.println("오프셋 계산 결과값 : ");
+			System.out.println(page * offset + 1);
+			System.out.println((page + 1) * offset);
+
+			// =======================================================================================
+			ResultSet rs = pstmt.executeQuery();
+			// 로그인한 경우, 로그인하지 않은 경우에 따라 다른 sql문이 실행됨을 위에서 확인할 수 있다.
+			while (rs.next()) {
+				MsgSet ms = new MsgSet(); // 댓글과 대댓글을 담을 공간
+				MessageVO m = new MessageVO(); // 댓글 객체 생성
+				ArrayList<ReplyVO> rlist = new ArrayList<ReplyVO>(); // 대댓글 객체 생성
+
+				// 먼저 댓글 객체에 해당 데이터를 담는다.
+				m.setMid(rs.getInt("mid"));
+				m.setMsg(rs.getString("msg"));
+				m.setFavcount(rs.getInt("favcount"));
+				m.setUuid(rs.getString("uuid"));
+				m.setUdate(rs.getDate("udate"));
+
+				// mid : 대댓글의 고유num, PK
+				// 댓글의 고유번호 PK에 맞는 대댓글의 모든 컬럼을 날짜 순서로 SELECT한다.
+				String rsql = "select * from reply where mid=? order by udate desc";
+				pstmt = conn.prepareStatement(rsql);
+				pstmt.setInt(1, rs.getInt("mid"));
+				ResultSet rrs = pstmt.executeQuery();
+				int rcnt = 0;
+				while (rrs.next()) {
+					ReplyVO r = new ReplyVO();
+					r.setUdate(rrs.getDate("udate"));
+					r.setMid(rrs.getInt("mid"));
+					r.setRid(rrs.getInt("rid"));
+					r.setRmsg(rrs.getString("rmsg"));
+					r.setUuid(rrs.getString("uuid"));
+					rlist.add(r);
+					rcnt++;
+				}
+				m.setReplycount(rcnt);
+
+				// MessageVO 타입의 공간에 댓글을 세팅시켜준다.
+				ms.setM(m);
+
+				// ArrayList<ReplyVO>의 공간에 다음의 대댓글을 세팅시켜준다.
+				ms.setRlist(rlist);
+				System.out.println(ms);
+
+				// 댓글과 해당하는 대댓글을 담은 객체 MsgSet을 ArrayList<MsgSet>타입의
+				// datas에 차곡 차곡 담아준다.
+				datas.add(ms);
+
+				rrs.close();
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			System.out.println("mPaging 퇴장");
+		}
+		return datas;
+
+	}
+
 }

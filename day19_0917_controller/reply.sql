@@ -83,6 +83,89 @@ select * from message order by udate asc;
 select count(*) from message where mid = 3
 
 
+---------------------------------------------------------------------------------------
+--select rownum as mid, uuid, msg, favcount, replycount, udate
+--
+--from (
+--
+--    select rownum as mid, uuid, msg, favcount, replycount, udate
+--
+--        from message
+--
+--        order by mid
+--)
+--where rownum >= 2
+--and rownum <= 5
+
+select * from (
+select rownum as mid, uuid, msg, favcount, replycount, udate
+from message
+order by mid)
+where mid between ${page} * ${offset} + 1 and (${page} + 1) * ${offset}
 
 
 ---------------------------------------------------------------------------------------
+
+where rownum = 2 
+
+
+---------------------------------------------------------------------------------------
+select rownum as mid, uuid, msg, favcount, replycount, udate
+
+from message
+
+where 
+
+order by mid
+---------------------------------------------------------------------------------------
+
+select * 
+
+from message
+
+order by mid
+---------------------------------------------------------------------------------------
+
+
+create table message(
+   mid int primary key,
+    uuid varchar(15),
+    msg varchar(100),
+    favcount int default 0,
+    replycount int default 0,
+    udate date
+);
+---------------------------------------------------------------------------------------
+
+select * from 
+	(select rownum 
+	as mid, uuid, msg, favcount, replycount, udate
+	from message
+	order by mid)
+	
+where mid 
+between 3 and 5
+
+select * from message
+
+---------------------------------------------------------------------------------------
+
+select * from (select rownum as mid, uuid, msg, favcount, replycount, udate from message order by mid) where mid between 3 and 5
+
+---------------------------------------------------------------------------------------
+
+
+
+
+select * from (select rownum as mid, uuid, msg, favcount, replycount, udate from message order by mid) where mid between ? and ?
+
+
+
+
+pstmt.setInt(1, (page*offset)+1);
+pstmt.setInt(2, (page+1)*offset);
+
+int offset = 5;
+page--; // 초기 페이지 값을 0으로 두고 처리
+
+
