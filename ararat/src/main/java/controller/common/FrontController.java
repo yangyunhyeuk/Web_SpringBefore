@@ -41,7 +41,7 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("확인");
+		System.out.println("GET 확인");
 		doAction(request, response);
 	}
 
@@ -51,7 +51,7 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("확인");
+		System.out.println("POST 확인");
 		doAction(request, response);
 
 	}
@@ -59,30 +59,37 @@ public class FrontController extends HttpServlet {
 	private void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1) 사용자의 요청을 분석
+		
+		
 		String uri = request.getRequestURI();
 		String cp = request.getContextPath();
 		String action = uri.substring(cp.length());
 
+		System.out.println(uri);
+		System.out.println(cp);
+		
+		System.out.println(action);
+
 		ActionForward forward = null;
 		// 2) 컨트롤러랑 매핑
-		if (action.equals("/main.do")) {
+		if (action.equals("/ararat/main.do")) {
 			forward = new MainAction().execute(request, response);
-		} else if (action.equals("/login.do")) {
+		} else if (action.equals("/ararat/login.do")) {
 			// 처리해야하는 프로세스는 LoginAction 파일에서 처리!
 			forward = new LoginAction().execute(request, response);
-		} else if (action.equals("/logout.do")) {
+		} else if (action.equals("/ararat/logout.do")) {
 			forward = new LogoutAction().execute(request, response);
-		} else if (action.equals("/insert.do")) {
+		} else if (action.equals("/ararat/insert.do")) {
 			forward = new InsertAction().execute(request, response);
-		} else if (action.equals("/haction.do")) {
+		} else if (action.equals("/ararat/haction.do")) {
 			forward = new HeartAction().execute(request, response);
-		} else if (action.equals("/mdelete.do")) {
+		} else if (action.equals("/ararat/mdelete.do")) {
 			forward = new MdeleteAction().execute(request, response);
-		} else if (action.equals("/rdelete.do")) {
+		} else if (action.equals("/ararat/rdelete.do")) {
 			forward = new RdeleteAction().execute(request, response);
-		} else if (action.equals("/minsert.do")) {
+		} else if (action.equals("/ararat/minsert.do")) {
 			forward = new MinsertAction().execute(request, response);
-		} else if (action.equals("/rinsert.do")) {
+		} else if (action.equals("/ararat/rinsert.do")) {
 			forward = new RinsertAction().execute(request, response);
 		}
 
