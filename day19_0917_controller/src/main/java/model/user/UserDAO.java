@@ -70,7 +70,7 @@ public class UserDAO {
 		Connection conn = DBCP.connect();
 		PreparedStatement pstmt = null;
 		ArrayList<UserVO> datas = new ArrayList<UserVO>();
-		String sql = "select * from mem where rownum <= 3 order by udate desc";
+		String sql = "select * from (select * from mem ORDER BY udate desc) where rownum <= 3";
 
 		try {
 			pstmt = conn.prepareStatement(sql);

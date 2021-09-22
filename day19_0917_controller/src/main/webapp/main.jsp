@@ -7,12 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>yh_게시판</title>
+
 <link rel="stylesheet" href="assets/css/main.css">
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-
 
 
 
@@ -166,15 +165,25 @@
 			</c:forEach>
 		</table>
 
+
+
+		<!-- viewcnt : 게시글 갯수, pages : 한 페이지 내에서 보여줄 게시글 수 -->
+		<!-- viewcnt % pages : 만약 게시글 수가 5로 나누고 나머지가 발생할 경우 1을 더해주어 페이지를 설정 -->
 		<c:set var="pages" value="5" />
 		<c:set var="p"
 			value="${viewcnt / pages + (viewcnt % pages != 0 ? 1 : 0)}" />
+		<!-- 상단에서 설계한 페이지 세팅을 통해 해당 페이지의 게시글을 가져온다. -->
+
 
 
 		<c:forEach var="i" begin="1" end="${p}">
 			<a href="main.do?page=${i}&selUser=${selUser}"><c:out
 					value="${i}" /></a>
 		</c:forEach>
+
+
+
+
 
 	</div>
 	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -195,24 +204,25 @@
 		<!-- ////////////////광고글//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<ol>
-			<li>
-				<a href="https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB">
-					<img src="assets/css/img/ad1.png" style="width: 250px; height: 150px; border: 1px solid red;" alt="광고_다방" />
-				</a>
-			</li>
-			<li>
-				<a href="https://www.cgv.co.kr/">
-					<img src="assets/css/img/ad2.png" style="width: 250px; height: 150px; border: 1px solid red;" alt="광고_이터널즈" />
-				</a>
-			</li>
-			<li>
-				<a href="https://www.burgerking.co.kr/#/home">
-					<img src="assets/css/img/ad3.png" style="width: 250px; height: 150px; border: 1px solid red;" alt="광고_킹거킹" />
-				</a>
-			</li>
+			<li><a
+				href="https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB">
+					<img src="assets/css/img/ad1.png"
+					style="width: 250px; height: 150px; border: 1px solid red;"
+					alt="광고_다방" />
+			</a></li>
+			<li><a href="https://www.cgv.co.kr/"> <img
+					src="assets/css/img/ad2.png"
+					style="width: 250px; height: 150px; border: 1px solid red;"
+					alt="광고_이터널즈" />
+			</a></li>
+			<li><a href="https://www.burgerking.co.kr/#/home"> <img
+					src="assets/css/img/ad3.png"
+					style="width: 250px; height: 150px; border: 1px solid red;"
+					alt="광고_킹거킹" />
+			</a></li>
 		</ol>
-		
-		<input type="button" value="봊튼" onclick="changeAd()" />
+
+		<input type="button" value="버튼" onclick="changeAd()" />
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	</div>
@@ -236,8 +246,10 @@
 	</footer>
 	<script src="assets/script/main.js"></script>
 	<script src="assets/script/newWindow.js"></script>
-	
+
 	<script>
+
+
 		var adProperties = [
 			{
 				href: "https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB",

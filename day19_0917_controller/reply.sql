@@ -54,6 +54,7 @@ select * from message order by udate asc;
 select * from message where memid='timo' order by udate desc;
 
 
+
 select * from mem;
 select * from message;
 select * from reply;
@@ -64,14 +65,23 @@ drop table reply;
 drop table mem;
 
 
+
+
+
+select * from (select * from mem ORDER BY udate desc) where rownum <= 3
+select * from mem where rownum <= 3 order by udate desc
+
+
+
+
 update message set replycount=replycount-1 where mid=36
 
 update message set replycount=replycount+1 where mid=3;
 
 
 select * from mem where rownum <= 3 order by udate desc
-select * from mem;
 
+select * from mem where rownum < 4 order by udate asc
 
 select count(*) from reply where mid=3;
 

@@ -72,9 +72,9 @@ ul li:first-child {
 }
 
 ul li a {
+	text-decoration: none;
 	height: 20px;
 	line-height: 20px;
-	text-decoration: none;
 	color: #000;
 }
 

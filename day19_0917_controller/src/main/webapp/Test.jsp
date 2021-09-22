@@ -13,9 +13,15 @@
 let name = 'hello'
 console.log(name)
 
-let name = 'world'
+name = 'world'
 console.log(name)
 
+
+const some = 'some'
+console.log(some)
+
+some = 'body'
+console.log(some)
 </script>
 
 </body>
