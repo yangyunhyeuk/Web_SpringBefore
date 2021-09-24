@@ -80,7 +80,8 @@
 		<br>
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 		<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
+<a>mcnt 값 : ${mcnt}</a>
+<a>viewcnt 값 : ${viewcnt}</a>
 		<c:if test="${mcnt < viewcnt}">
 			<a href="main.do?mcnt=${mcnt+1}&selUser=${selUser}">더보기&gt;&gt;</a>
 			<br>
@@ -88,62 +89,87 @@
 		<h2>전체목록</h2>
 
 		<ul>
-			<li><c:forEach var="v" items="${datas}">
-					<c:set var="m" value="${v.m}" />
-					<a href="#">
-						<h3>
-							[작성자 : ${m.uuid}] [댓글 내용 : ${m.msg}] &gt;&gt; [좋아요 :
-							${m.favcount} | 대댓글 ${m.replycount} | ${m.udate}]
-							<!-- seUser와 m.uuid가 일치하는 경우의 조건에서 삭제버튼 뜨기 -->
-							<button style="font-size: 1px;"
-								onclick="location.href='haction.do?mid=${m.mid}&mcnt=${mcnt}&selUser=${selUser}'">&#x1f497</button>
+			<li><c:set var="doneLoop" value="false" /> 
+			<c:forEach var="v" items="${datas}">
+					<c:if test="${not doneLoop}">
+						<c:set var="m" value="${v.m}" />
+						<a href="#"> 
+						<c:choose>
+								<c:when test="${viewcnt == 0}">
+									<h3>1차 : 작성된 게시글이 없습니다.</h3>
+									<c:set var="doneLoop" value="true" />
+								</c:when>
+								<c:when test="${viewcnt eq ''}">
+									<h3>2차 : 작성된 게시글이 없습니다.</h3>
+									<c:set var="doneLoop" value="true" />
+								</c:when>
+								<c:when test="${empty viewcnt}">
+									<h3>3차 : 작성된 게시글이 없습니다.</h3>
+									<c:set var="doneLoop" value="true" />
+								</c:when>
+								
+								<c:otherwise>
+									<h3>
+										[작성자 : ${m.uuid}] [댓글 내용 : ${m.msg}] &gt;&gt; [좋아요 :
+										${m.favcount} | 대댓글 ${m.replycount} | ${m.udate}]
+										<!-- seUser와 m.uuid가 일치하는 경우의 조건에서 삭제버튼 뜨기 -->
+										<button style="font-size: 1px;"
+											onclick="location.href='haction.do?mid=${m.mid}&mcnt=${mcnt}&selUser=${selUser}'">&#x1f497</button>
 
-							<mytag:mdelete mid="${m.mid}" uuid="${m.uuid}" />
+										<mytag:mdelete mid="${m.mid}" uuid="${m.uuid}" />
 
-						</h3>
-					</a>
-					<c:choose>
-						<c:when test="${empty v.rlist}">
-							<ol>
-
-								<h4>작성된 대댓글이 없습니다.</h4>
-								<form action="rinsert.do" method="post" name="form1">
-									<input type="hidden" name="mcnt" value="${mcnt}"> <input
-										type="hidden" name="mid" value="${m.mid}">
-									<mytag:insertmsg type="rmsg" />
-									<input type="hidden" name="uuid" value="${seUser}"> <input
-										type="hidden" name="selUser" value="${selUser}">
-								</form>
-								<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-							</ol>
-						</c:when>
-
-						<c:when test="${not empty v.rlist}">
-							<ol>
-
-								<c:forEach var="r" items="${v.rlist}">
-									<li>${r.uuid}>>${r.rmsg}[${r.udate}]</li>
+									</h3>
+								</c:otherwise>
 
 
-									<mytag:rdelete mid="${m.mid}" uuid="${r.uuid}" rid="${r.rid}" />
+							</c:choose>
+						</a>
+						<c:choose>
+							<c:when test="${empty v.rlist}">
+								<ol>
 
-								</c:forEach>
-								<form action="rinsert.do" method="post" name="form1">
-									<input type="hidden" name="mcnt" value="${mcnt}"> <input
-										type="hidden" name="mid" value="${m.mid}">
-									<mytag:insertmsg type="rmsg" />
-									<input type="hidden" name="uuid" value="${seUser}"> <input
-										type="hidden" name="selUser" value="${selUser}">
-								</form>
+									<h4>작성된 대댓글이 없습니다.</h4>
+									<form action="rinsert.do" method="post" name="form1">
+										<input type="hidden" name="mcnt" value="${mcnt}"> <input
+											type="hidden" name="mid" value="${m.mid}">
+										<mytag:insertmsg type="rmsg" />
+										<input type="hidden" name="uuid" value="${seUser}"> <input
+											type="hidden" name="selUser" value="${selUser}">
+									</form>
+									<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-							</ol>
-						</c:when>
-					</c:choose>
+								</ol>
+							</c:when>
+
+							<c:when test="${not empty v.rlist}">
+								<ol>
+
+									<c:forEach var="r" items="${v.rlist}">
+										<li>${r.uuid}>>${r.rmsg}[${r.udate}]</li>
+
+
+										<mytag:rdelete mid="${m.mid}" uuid="${r.uuid}" rid="${r.rid}" />
+
+									</c:forEach>
+									<form action="rinsert.do" method="post" name="form1">
+										<input type="hidden" name="mcnt" value="${mcnt}"> <input
+											type="hidden" name="mid" value="${m.mid}">
+										<mytag:insertmsg type="rmsg" />
+										<input type="hidden" name="uuid" value="${seUser}"> <input
+											type="hidden" name="selUser" value="${selUser}">
+									</form>
+
+								</ol>
+							</c:when>
+						</c:choose>
+					</c:if>
 				</c:forEach></li>
 		</ul>
 
 		<h3>페이징 목록</h3>
+
+
+
 
 		<table border="1px">
 			<tr>
@@ -170,20 +196,36 @@
 		<!-- viewcnt : 게시글 갯수, pages : 한 페이지 내에서 보여줄 게시글 수 -->
 		<!-- viewcnt % pages : 만약 게시글 수가 5로 나누고 나머지가 발생할 경우 1을 더해주어 페이지를 설정 -->
 		<c:set var="pages" value="5" />
-		<c:set var="p"
-			value="${viewcnt / pages + (viewcnt % pages != 0 ? 1 : 0)}" />
+		<c:set var="p" value="${viewcnt / pages + (viewcnt % pages != 0 ? 1 : 0)}" />
 		<!-- 상단에서 설계한 페이지 세팅을 통해 해당 페이지의 게시글을 가져온다. -->
 
 
-
-		<c:forEach var="i" begin="1" end="${p}">
-			<a href="main.do?page=${i}&selUser=${selUser}"><c:out
-					value="${i}" /></a>
+		<!-- page : 현재 페이지 데이터 -->
+		<a href="main.do?page=${page eq 1?1:page-1}&selUser=${selUser}">이전</a>
+		<!--  end="${p<cntEnd ? p:cntEnd}" -->
+		<c:forEach var="i" begin="${cntStart}" end="${p<cntEnd ? p:cntEnd}">
+			<c:choose>
+				<c:when test="${page eq p}">
+					<a href="main.do?page=${i}&selUser=${selUser}"
+						style="text-decoration: underline;"><c:out value="${i}" /></a>
+				</c:when>
+				<c:otherwise>
+					<a href="main.do?page=${i}&selUser=${selUser}"><c:out
+							value="${i}" /></a>
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
+		
+		<a href="main.do?page=${page eq Math.floor(p)?page:page+1}&selUser=${selUser}">다음</a>
 
-
-
-
+		<br>
+		<a>cntStart : ${cntStart}</a> 
+		<a>cntEnd : ${cntEnd}</a> 
+		<a>viewcnt : ${viewcnt}</a> 
+		<a>pages : ${pages}</a> 
+		<a>p : ${p}</a>
+		<a>p : ${Math.floor(p)}</a>
+		<a>page : ${page}</a>
 
 	</div>
 	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -207,17 +249,17 @@
 			<li><a
 				href="https://www.dabangapp.com/?gclid=Cj0KCQjws4aKBhDPARIsAIWH0JVWaGnuXLgfGuGKgnfXm8CarBIpHGbkUAd6z88CfdOrjtW9cIv8dhcaAv4-EALw_wcB">
 					<img src="assets/css/img/ad1.png"
-					style="width: 250px; height: 150px; border: 1px solid red;"
+					style="width: 200px; height: 100px; border: 1px solid red;"
 					alt="광고_다방" />
 			</a></li>
 			<li><a href="https://www.cgv.co.kr/"> <img
 					src="assets/css/img/ad2.png"
-					style="width: 250px; height: 150px; border: 1px solid red;"
+					style="width: 200px; height: 100px; border: 1px solid red;"
 					alt="광고_이터널즈" />
 			</a></li>
 			<li><a href="https://www.burgerking.co.kr/#/home"> <img
 					src="assets/css/img/ad3.png"
-					style="width: 250px; height: 150px; border: 1px solid red;"
+					style="width: 200px; height: 100px; border: 1px solid red;"
 					alt="광고_킹거킹" />
 			</a></li>
 		</ol>

@@ -165,22 +165,23 @@ public class MessageDAO {
 		return true;
 	}
 
-	public int Mcount(String mid) {
+	public int Mcount(String uuid) {
+		System.out.println("MessageDAO 진입 Mcount 실행 mid 값 : "+uuid);
 		int viewcnt = 0;
 		Connection conn = DBCP.connect();
 		PreparedStatement pstmt = null;
 
 		try {
-			if ((mid == null) || (mid.equals(""))) {
+			if ((uuid == null) || (uuid.equals(""))) {
 				String sql1 = "select count(*) from message";
 				pstmt = conn.prepareStatement(sql1);
 			}
 			// =======================================================================================
 			// 특정 회원
 			else {
-				String sql2 = "select count(*) from message where mid = ?";
+				String sql2 = "select count(*) from message where uuid = ?";
 				pstmt = conn.prepareStatement(sql2);
-				pstmt.setString(1, mid);
+				pstmt.setString(1, uuid);
 			}
 			ResultSet rs = pstmt.executeQuery();
 			System.out.println("안녕 ");

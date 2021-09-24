@@ -39,7 +39,7 @@ public class MainAction implements Action {
 		UserDAO uDAO = new UserDAO();
 		ArrayList<MsgSet> datas = mDAO.selectAll(selUser, mcnt);
 		ArrayList<UserVO> newUsers = uDAO.selectAll();
-
+		System.out.println("메인액션에서 mDAO.Mcount 실행하기 전 selUser 값 확인"+selUser);
 		int viewcnt = mDAO.Mcount(selUser);
 
 		System.out.println(viewcnt);
@@ -52,17 +52,33 @@ public class MainAction implements Action {
 			page = Integer.parseInt(mpage);
 
 		}
-
-		System.out.println("페이지 데이터 : " + page);
+		System.out.println("MainAction 에서의 페이지 데이터 : " + page);
+		System.out.println("MainAction 에서의 viewCnt : " + viewcnt);
 		ArrayList<MsgSet> paging = mDAO.mPaging(page);
 		request.setAttribute("paging", paging); // 전체 게시글데이터
+		request.setAttribute("page", page); // 현재 게시글데이터
+		
+		
+		
+		int cntStart = 1;
+		int cntEnd = 5;
+		if(page/5 >= 1) {
+			cntStart += (5*(page%5));
+			cntEnd += (5*(page%5));
+		}
+		request.setAttribute("cntStart", cntStart); 
+		request.setAttribute("cntEnd", cntEnd); 
+		
 		/* 페이징 프로세스 */
 
+		
+		
 		request.setAttribute("datas", datas); // 전체 게시글데이터
 		request.setAttribute("newUsers", newUsers); // 신규 유저
 		request.setAttribute("selUser", selUser); // 보고있는 유저
 		request.setAttribute("mcnt", mcnt); // 볼 게시글 갯수
 		request.setAttribute("viewcnt", viewcnt); // 가져온 게시글 갯수
+		System.out.println("메인액션 퇴장 직전 datas 값"+datas);
 
 		forward.setRedirect(false);
 		forward.setPath("main.jsp");

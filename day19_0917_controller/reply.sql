@@ -41,6 +41,30 @@ insert into message values(8,'lisa','확인',0,0,sysdate);
 insert into message values(9,'jisoo','확인',0,0,sysdate);
 insert into message values(10,'yg','확인',0,0,sysdate);
 
+insert into message values(11,'yg','글작성1',0,0,sysdate);
+insert into message values(12,'jenny','hello',0,0,sysdate);
+insert into message values(13,'rose','확인',0,0,sysdate);
+insert into message values(14,'lisa','확인',0,0,sysdate);
+insert into message values(15,'jisoo','확인',0,0,sysdate);
+insert into message values(16,'jenny','확인',0,0,sysdate);
+insert into message values(17,'rose','확인',0,0,sysdate);
+insert into message values(18,'lisa','확인',0,0,sysdate);
+insert into message values(19,'jisoo','확인',0,0,sysdate);
+insert into message values(20,'yg','확인',0,0,sysdate);
+
+insert into message values(21,'yg','글작성1',0,0,sysdate);
+insert into message values(22,'jenny','hello',0,0,sysdate);
+insert into message values(23,'rose','확인',0,0,sysdate);
+insert into message values(24,'lisa','확인',0,0,sysdate);
+insert into message values(25,'jisoo','확인',0,0,sysdate);
+insert into message values(26,'jenny','확인',0,0,sysdate);
+insert into message values(27,'rose','확인',0,0,sysdate);
+insert into message values(28,'lisa','확인',0,0,sysdate);
+insert into message values(29,'jisoo','확인',0,0,sysdate);
+insert into message values(30,'yg','확인',0,0,sysdate);
+
+
+
 insert into reply values(1,1,'jenny',sysdate,'댓글1');
 insert into reply values(2,1,'lisa',sysdate,'댓글2');
 insert into reply values(3,2,'yg',sysdate,'댓글1');

@@ -94,6 +94,7 @@ public class FrontController extends HttpServlet {
 		}
 
 		// history go back을 위해 forward가 null이 아닐 때만 수행하게 다음과 같이 조건문을 만든다!!
+		// 페이지로 이동하는 게 아닌 경우 null이 발생하기에 다음의 조건을 걸어준다.
 		if (forward != null) {
 			// 3) 사용자에게 결과화면 출력
 			if (forward.isRedirect()) {
