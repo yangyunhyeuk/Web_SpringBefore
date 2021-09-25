@@ -53,6 +53,7 @@ CREATE TABLE FREECOMMENT(			-- 자유게시판
    PNUM INT NOT NULL,               -- 게시글 번호  
    MNAME VARCHAR(50) NOT NULL,         -- 회원 닉네임
    MID VARCHAR(50) NOT NULL          -- 회원 아이디 
+   
 );
 
 drop table FREECOMMENT;

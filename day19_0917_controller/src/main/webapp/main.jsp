@@ -218,6 +218,11 @@
 		
 		<a href="main.do?page=${page eq Math.floor(p)?page:page+1}&selUser=${selUser}">다음</a>
 
+
+
+
+
+
 		<br>
 		<a>cntStart : ${cntStart}</a> 
 		<a>cntEnd : ${cntEnd}</a> 
