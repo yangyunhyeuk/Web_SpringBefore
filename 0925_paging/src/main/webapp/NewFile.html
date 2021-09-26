@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.haction {
+	position: absolute;
+	bottom: -60px;
+	width: 50px;
+	height: 50px;
+	background:
+		url("https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/15721583221557740359-512.png")
+		no-repeat;
+	background-size: cover;
+}
+
+.haction:first-of-type {
+	left: 10px;
+	animation: bubble 2s linear;
+	animation-fill-mode : forward;
+	animation-iteration-count: 1;
+}
+
+.haction:nth-of-type(2) {
+	left: 50%;
+	animation: bubble 10s linear;
+	animation-fill-mode : forward;
+	animation-iteration-count: 1;
+}
+
+.haction:nth-of-type(3) {
+	left: 150px;
+	animation: bubble 8s linear;
+	animation-fill-mode : forward;
+	animation-iteration-count: 1;
+}
+
+
+@keyframes bubble { 
+	0% {
+	bottom: -100px;
+	opacity: 1
+	}
+	50%{
+	opacity : 0
+	}
+	to {
+		bottom: 100%;
+		opacity: 0
+	}
+}
+</style>
+
+</head>
+<body>
+	<div class="haction"></div>
+	<div class="haction"></div>
+	<div class="haction"></div>
+
+
+</body>
+</html>
