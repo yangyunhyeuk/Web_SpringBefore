@@ -16,6 +16,7 @@ INSERT INTO MEMBER VALUES ('hana','11','하나','hana11@naver.com','user');
 INSERT INTO MEMBER VALUES ('admin','1004','관리자','admin@helper.com','admin');
 ------------------------------------------------------------------------------------------
 drop table MEMBER;
+drop table studyboard;
 drop table FREECOMMENT;
 ------------------------------------------------------------------------------------------
 UPDATE MEMBER SET  MPW='11', MNAME ='11', MEMAIL='11@naver.com', ROLE='admin' where MID='Z123';
@@ -118,6 +119,11 @@ CREATE TABLE FREEBOARD(
    CNT INT NOT NULL,                 -- 조회수
    CATEGORY VARCHAR(50) NOT NULL        -- 카테고리 
 );
+
+
+
+select * from all_tables;
+
 -- 게시글 리스트 보기
 SELECT * FROM FREEBOARD ORDER BY PNUM DESC; --최신글 
 SELECT * FROM FREEBOARD WHERE PTITLE='LIKE %H%' ORDER BY PNUM DESC; 
@@ -134,6 +140,54 @@ CREATE TABLE STUDYBOARD(
    CNT INT NOT NULL,                 -- 조회수
    CATEGORY VARCHAR(50) NOT NULL        -- 카테고리 
 );
+
+select * from STUDYBOARD;
+
+insert into STUDYBOARD values(1,'title1','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(2,'title2','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(3,'title3','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(4,'title4','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(5,'title5','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(6,'title6','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(7,'title7','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(8,'title8','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(9,'title9','content',sysdate,'nickname','garen',0,'study');
+insert into STUDYBOARD values(10,'title10','content',sysdate,'nickname','garen',0,'study');
+
+insert into STUDYBOARD values(11,'title11','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(12,'title12','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(13,'title13','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(14,'title14','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(15,'title15','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(16,'title16','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(17,'title17','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(18,'title18','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(19,'title19','content',sysdate,'nickname','timo',0,'study');
+insert into STUDYBOARD values(20,'title20','content',sysdate,'nickname','timo',0,'study');
+
+insert into STUDYBOARD values(21,'title21','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(22,'title22','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(23,'title23','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(24,'title24','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(25,'title25','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(26,'title26','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(27,'title27','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(28,'title28','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(29,'title29','content',sysdate,'nickname','ari',0,'study');
+insert into STUDYBOARD values(30,'title30','content',sysdate,'nickname','ari',0,'study');
+
+select count(*) from STUDYBOARD
+SELECT * FROM ALL_TABLES;
+SELECT * FROM STUDYBOARD;
+
+select count(*) from STUDYBOARD
+
+select * from (select rownum as pnum, ptitle, pcontent, pdate, mname, mid, cnt, category from STUDYBOARD order by pnum) where pnum between 1 and 5
+
+
+
+select * from (select rownum as pnum, ptitle, pcontent, pdate, mname, mid, cnt, category from STUDYBOARD order by pnum) where pnum between 1 and 10;
+
 ----------------------------------------------------------------------------------------------
 CREATE TABLE NOTICEBOARD(
    PNUM INT PRIMARY KEY,              -- 게시글 고유 번호

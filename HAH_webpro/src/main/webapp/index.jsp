@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%
-pageContext.forward("control.jsp?action=main");
+pageContext.forward("/main.do");
 %>
 
-<!--FreeCoDAO, FreeCoVO, MemVO, MemDAO 기준으로 테스트  -->

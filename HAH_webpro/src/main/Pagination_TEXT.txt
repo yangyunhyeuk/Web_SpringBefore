@@ -1,0 +1,8 @@
+페이지네이션 관련 소스파일
+
+controller.action.MainAction.java
+model.board.BoardDAO.java
+model.board.BoardVO.java
+model.page.Paging.java
+main.jsp
+DB.sql
