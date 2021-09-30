@@ -1,6 +1,8 @@
 package web.mail;
 
 import java.io.UnsupportedEncodingException;
+
+
 import java.util.Date;
 import java.util.Properties;
 
@@ -13,9 +15,11 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class MailSend {
 
-	public void MailSend() {
+	public void MailSend(String mymail) {
 		Properties prop = System.getProperties();
 		prop.put("mail.smtp.starttls.enable", "true");
 		prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -28,14 +32,21 @@ public class MailSend {
 
 		MimeMessage msg = new MimeMessage(session);
 
+		// String mcontent = RandomStringUtils.randomAlphanumeric(15);
+
 		try {
 			msg.setSentDate(new Date());
 
-			msg.setFrom(new InternetAddress("메일 주소 입력바람!", "VISITOR"));
-			InternetAddress to = new InternetAddress("메일 주소 입력바람!");
+			msg.setFrom(new InternetAddress(mymail, "VISITOR"));
+			InternetAddress to = new InternetAddress(mymail);
+
+			String mcontent = RandomStringUtils.randomAlphanumeric(15);
+
 			msg.setRecipient(Message.RecipientType.TO, to);
-			msg.setSubject("자바를 이용한 Gmail SMTP 예제", "UTF-8");
-			msg.setText("Gmail SMTP를 이용한 메일 보내기", "UTF-8");
+			msg.setSubject("new_임시비밀번호입니다.", "UTF-8");
+			msg.setText(mcontent, "UTF-8");
+			// msg.setText(mcontent, "UTF-8");
+			// System.out.println(mcontent);
 
 			Transport.send(msg);
 

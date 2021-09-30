@@ -1,6 +1,7 @@
 package web.mail;
 
 import javax.mail.Authenticator;
+
 import javax.mail.PasswordAuthentication;
 
 public class MailAuth extends Authenticator {
@@ -8,8 +9,8 @@ public class MailAuth extends Authenticator {
 	PasswordAuthentication pa;
 
 	public MailAuth() {
-		String mail_id = "구글 메일주소";
-		String mail_pw = "구글 비밀번호";
+		String mail_id = "구글 계정";
+		String mail_pw = "앱 키";
 
 		pa = new PasswordAuthentication(mail_id, mail_pw);
 	}

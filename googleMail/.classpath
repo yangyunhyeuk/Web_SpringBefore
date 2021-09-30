@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="C:/Users/azz46/Desktop/mail-1.4.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/azz46/Desktop/activation.jar"/>
 	<classpathentry kind="lib" path="C:/Users/azz46/Desktop/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/azz46/Desktop/commons-lang3-3.12.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
