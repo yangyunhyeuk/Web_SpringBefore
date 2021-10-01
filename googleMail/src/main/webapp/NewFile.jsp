@@ -16,7 +16,7 @@
 }
 </style>
 <script
-	src="http://maps.google.com/maps/api/js?key=AIzaSyCqpzb8F46dD759PiDr-CA5Ry9QOMNI0Pc&region=kr"></script>
+	src="http://maps.google.com/maps/api/js?key=APIKEY&region=kr"></script>
 </head>
 <body>
 	<div id="map"></div>
